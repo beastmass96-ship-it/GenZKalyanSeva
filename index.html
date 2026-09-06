@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen-Z Kalyan Seva | Young People, Real Impact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Color Palette & Variables --- */
+        :root {
+            --primary-green: #8EE000;
+            --dark-bg: #0a0a0a;
+            --text-dark: #1a1a1a;
+            --white: #ffffff;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            /* Prevents scrolling while splash screen is active */
+            overflow-y: hidden; 
+        }
+
+        /* --- PREMIUM SPLASH SCREEN --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #050505;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .splash-glow-orb {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(142,224,0,0.15) 0%, rgba(5,5,5,0) 65%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: pulseGlow 3s infinite alternate ease-in-out;
+        }
+
+        .splash-text {
+            position: relative;
+            z-index: 2;
+            color: var(--primary-green);
+            font-size: 1.6rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 0 20px;
+            opacity: 0;
+            filter: blur(10px);
+            animation: cinematicReveal 1s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        .splash-text span {
+            color: var(--white);
+            display: block;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Authentic Vector Silhouettes */
+        .silhouette-scene {
+            position: relative;
+            z-index: 2;
+            width: 320px;
+            height: 220px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+
+        .giver-silhouette {
+            fill: var(--primary-green);
+        }
+
+        .receiver-silhouette {
+            fill: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Box animation - Moves perfectly from hand to hand */
+        .surprise-box {
+            animation: authenticHandover 2.5s infinite cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Keyframes */
+        @keyframes cinematicReveal {
+            to { opacity: 1; filter: blur(0); transform: translateY(-10px); }
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        @keyframes authenticHandover {
+            0% { transform: translate(0, 0) scale(0.8); opacity: 0; }
+            15% { transform: translate(0, 0) scale(1); opacity: 1; } /* Appears in man's hand */
+            45% { transform: translate(50px, 15px) scale(1); opacity: 1; } /* Glides to child's hand */
+            75% { transform: translate(50px, 15px) scale(1); opacity: 1; } /* Rests in child's hand */
+            90% { transform: translate(50px, 15px) scale(0.8); opacity: 0; } /* Fades out */
+            100% { transform: translate(0, 0); opacity: 0; }
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo-img {
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .btn-donate-nav {
+            background-color: var(--primary-green);
+            color: var(--dark-bg);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        
+        .btn-donate-nav:hover {
+            background-color: var(--dark-bg);
+            color: var(--primary-green);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-green);
+            text-shadow: 1px 1px 0px #000;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .btn-main {
+            background-color: var(--dark-bg);
+            color: var(--primary-green);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(142, 224, 0, 0.4);
+        }
+
+        /* --- About Section --- */
+        #about {
+            padding: 100px 5%;
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 50%;
+            height: 4px;
+            background-color: var(--primary-green);
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            border-radius: 2px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .about-card {
+            padding: 40px 20px;
+            background: #f9f9f9;
+            border-radius: 20px;
+            transition: var(--transition);
+            border-bottom: 5px solid transparent;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 5px solid var(--primary-green);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .about-card i {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* --- Donate Section --- */
+        #donate {
+            padding: 100px 5%;
+            background-color: var(--dark-bg);
+            color: var(--white);
+            text-align: center;
+        }
+
+        #donate .section-title {
+            color: var(--white);
+        }
+
+        .donate-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .donate-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .qr-placeholder {
+            width: 250px;
+            height: 250px;
+            background-color: var(--white);
+            margin: 0 auto 20px auto;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 4px solid var(--primary-green);
+        }
+
+        .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upi-container {
+            background: var(--white);
+            color: var(--dark-bg);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: var(--primary-green);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background: var(--dark-bg);
+            color: var(--primary-green);
+        }
+
+        /* --- Contact / Footer --- */
+        footer {
+            background-color: #050505;
+            color: var(--white);
+            padding: 60px 5% 20px 5%;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary-green);
+            background: rgba(142, 224, 0, 0.1);
+            padding: 20px;
+            border-radius: 50%;
+        }
+
+        .contact-item p {
+            font-size: 1.1rem;
+        }
+
+        .copyright {
+            margin-top: 40px;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .splash-text { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="splash-screen">
+        <div class="splash-glow-orb"></div>
+        
+        <div class="splash-text">
+            "Areyy wahh acche karm kerne chalo kerdiye?...
+            <span>Sath mai Swarg jayenge! ✨</span>"
+        </div>
+        
+        <svg class="silhouette-scene" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20" y1="200" x2="300" y2="200" stroke="#222" stroke-width="3" stroke-linecap="round"/>
+            
+            <g class="giver-silhouette">
+                <circle cx="90" cy="70" r="16" />
+                <path d="M 70 95 Q 105 80 115 130 L 95 200 L 65 200 L 85 140 L 65 200 L 40 200 Z" stroke-linejoin="round"/>
+                <path d="M 95 95 Q 125 110 150 105" stroke="var(--primary-green)" stroke-width="14" stroke-linecap="round" fill="none"/>
+            </g>
+
+            <g class="surprise-box">
+                <rect x="140" y="82" width="28" height="28" rx="4" fill="#ffffff" filter="drop-shadow(0 0 8px rgba(255,255,255,0.8))"/>
+                <path d="M 140 96 L 168 96 M 154 82 L 154 110" stroke="var(--primary-green)" stroke-width="3" fill="none"/>
+            </g>
+
+            <g class="receiver-silhouette">
+                <circle cx="250" cy="125" r="13" />
+                <path d="M 230 145 Q 260 135 265 175 L 265 200 L 190 200 Q 200 185 215 180 Q 235 175 240 200 Z" stroke-linejoin="round"/>
+                <path d="M 245 150 Q 215 150 190 120" stroke="rgba(255, 255, 255, 0.9)" stroke-width="12" stroke-linecap="round" fill="none"/>
+            </g>
+        </svg>
+    </div>
+
+    <div id="main-content" style="opacity: 0; transition: opacity 0.5s ease-in-out;">
+        
+        <nav>
+            <img src="logo.png" alt="Gen-Z Kalyan Seva Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/150x50/111/8EE000?text=GEN-Z+LOGO'">
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">Our Mission</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#donate" class="btn-donate-nav">Donate Now</a></li>
+            </ul>
+        </nav>
+
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Young People. <br><span>Real Impact.</span></h1>
+                <p>We are the generation of change. Gen-Z Kalyan Seva is on a relentless mission to ensure underprivileged children get the food they need to survive and the education they need to thrive. Join the movement.</p>
+                <a href="#donate" class="btn-main">Fund a Better Tomorrow <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2 class="section-title">Who We Are</h2>
+            <p class="about-text">
+                <b>Gen-Z Kalyan Seva</b> is a non-profit organization driven by youth, hoping towards the development of underprivileged communities. We refuse to just watch from the sidelines. Our core focus lies in providing critical health resources, quality education, and nutritious food to poor children who need it the most. We bridge the gap between people, purpose, and a better tomorrow.
+            </p>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <i class="fas fa-apple-whole"></i>
+                    <h3>Zero Hunger</h3>
+                    <p>Providing daily nutritious meals and rations to children living on the streets, ensuring no child goes to sleep hungry.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Education for All</h3>
+                    <p>Distributing books, stationery, and offering free foundational classes so that financial status doesn't dictate a child's future.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Health & Hygiene</h3>
+                    <p>Conducting health camps, distributing clean clothing, and teaching basic sanitation to build stronger, healthier communities.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="donate">
+            <h2 class="section-title">Support Our Mission</h2>
+            <p style="margin-top: 20px; font-size: 1.1rem; opacity: 0.9;">Your funding directly translates to meals, books, and medical care for the kids who need it.</p>
+            
+            <div class="donate-container">
+                <div class="donate-box">
+                    <h3><i class="fas fa-qrcode" style="color: var(--primary-green);"></i> Scan & Pay (PhonePe)</h3>
+                    <p style="margin: 15px 0; font-size: 0.9rem; color: #ccc;">Scan the QR code below using any UPI app.</p>
+                    
+                    <div class="qr-placeholder">
+                        <img src="qr-code.png" alt="PhonePe QR Code" onerror="this.src='https://via.placeholder.com/250x250/fff/111?text=Your+QR+Code+Here'">
+                    </div>
+                </div>
+
+                <div class="donate-box" style="display: flex; flex-direction: column; justify-content: center;">
+                    <h3><i class="fas fa-mobile-alt" style="color: var(--primary-green);"></i> Pay via UPI ID</h3>
+                    <p style="margin: 15px 0; font-size: 0.9rem; color: #ccc;">You can also copy the UPI ID below to transfer funds directly.</p>
+                    
+                    <div class="upi-container">
+                        <span id="upi-text">your-upi-id@ybl</span>
+                        <button class="copy-btn" onclick="copyUPI()"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <div id="copy-alert" style="color: var(--primary-green); margin-top: 10px; font-size: 0.9rem; display: none;">UPI ID Copied!</div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact">
+            <h2 class="section-title" style="color: var(--white);">Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p><strong>Call / WhatsApp</strong><br>+91 8969991813</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p><strong>Email Us</strong><br>genzjansewakalyan@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p><strong>Location</strong><br>Patna, Bihar</p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 Gen-Z Kalyan Seva. All rights reserved. | People • Purpose • A Better Tomorrow</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // DOMContentLoaded runs IMMEDIATELY as soon as the HTML is read. 
+        // It does NOT wait for heavy images to load, which fixes the frozen screen bug!
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                const main = document.getElementById('main-content');
+                
+                // Fade out splash screen
+                splash.style.opacity = '0';
+                
+                // Wait 0.5s for the fade animation to finish, then show main content
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    main.style.opacity = '1';
+                    
+                    // Allow the user to scroll again now that the main page is visible
+                    document.body.style.overflowY = 'auto'; 
+                }, 500); 
+                
+            }, 3500); // Wait exactly 3.5 seconds
+        });
+
+        // Copy UPI Functionality
+        function copyUPI() {
+            const upiText = document.getElementById("upi-text").innerText;
+            navigator.clipboard.writeText(upiText).then(() => {
+                const alert = document.getElementById("copy-alert");
+                alert.style.display = "block";
+                setTimeout(() => {
+                    alert.style.display = "none";
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
